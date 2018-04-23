@@ -17,8 +17,8 @@ coordinate_list = volcano_data.to_dict('records')
 
 map = folium.Map(location=[47.609722, -122.333056], zoom_start=3, tiles="Mapbox Bright")
 
-vgroup = folium.FeatureGroup(name="Volcanoes")
 pgroup = folium.FeatureGroup(name="Population")
+vgroup = folium.FeatureGroup(name="Volcanoes")
 
 pgroup.add_child(folium.GeoJson(
     data=(open('world.json', 'r', encoding="utf-8-sig").read()),
@@ -42,8 +42,8 @@ for coordinate in coordinate_list:
     vgroup.add_child(folium.CircleMarker(location=location_coords, popup=location_popup, radius=6, fill=True, fill_color=location_color, fill_opacity=0.7, color="grey"))
 
 
-map.add_child(vgroup)
 map.add_child(pgroup)
+map.add_child(vgroup)
 map.add_child(folium.LayerControl())
 
 map.save("Map1.html")
