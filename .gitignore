@@ -1,7 +1,22 @@
+# ignores for virtualenv folders
+bin/
+include/
+lib/
+share/
+
+# ignore for python cache files
+__pycache__
+
+# ignore for vscode
 .vscode
+
+# misc
 data.json
 supermarkets*
 smallgray.png
-.ipynb_checkpoints
-*-checkpoints.ipynb
 world.json
+
+# jupyter notebook files
+**/.ipynb_checkpoints
+*-checkpoints.ipynb
+
