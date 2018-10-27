@@ -4,6 +4,7 @@ include/
 lib/
 share/
 etc/
+env/
 
 # ignore for python cache files
 __pycache__
