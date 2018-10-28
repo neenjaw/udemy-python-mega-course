@@ -4,6 +4,7 @@ An application to manage a bookstore repository
 
 from tkinter import *
 from tkinter import ttk
+from tkinter import font
 
 class BookWindow():
     def __init__(self, parent):
@@ -76,34 +77,46 @@ class BookWindow():
         self.listbox_frame.grid(column=0, row=1, padx=(12,6), pady=(6,12), sticky=(N, W, E, S))
         self.listbox_frame.rowconfigure(0, weight=1)
         
-        self.book_listbox = Listbox(self.listbox_frame, height=10, width=60)
-        self.book_listbox.grid(row=0, column=0, padx=(0,6), sticky=(N,E,W,S,))
+        self.book_listbox_scrollbar = Scrollbar(self.listbox_frame)
+        self.book_listbox_scrollbar.grid(row=0, column=1, padx=(2,6), sticky=(N,S,))
+
+        self.book_listbox_font = font.Font(family="Courier", size=12)
+
+        self.book_listbox = Listbox(
+            self.listbox_frame, 
+            height=10, 
+            width=80, 
+            yscrollcommand=self.book_listbox_scrollbar.set, 
+            font=self.book_listbox_font)
+        self.book_listbox.grid(row=0, column=0, sticky=(N,E,W,S,))
         
         """
         The lower right command box
         """
         
-        self.command_frame = ttk.Frame(self.parent)
-        self.command_frame.grid(column=1, row=1, padx=(6,12), pady=(6,12), sticky=(N,E,W,S,))
+        self.command_button_frame = ttk.Frame(self.parent)
+        self.command_button_frame.grid(column=1, row=1, padx=(6,12), pady=(6,12), sticky=(N,E,W,S,))
         
-        self.view_command = ttk.Button(self.command_frame, text="View all")
-        self.view_command.grid(row=0, column=0, pady=(0,6), sticky=(W, E,))
+        self.button_view_command = ttk.Button(self.command_button_frame, text="View all")
+        self.button_view_command.grid(row=0, column=0, pady=(0,6), sticky=(W, E,))
         
-        self.search_command = ttk.Button(self.command_frame, text="Search")
-        self.search_command.grid(row=1, column=0, pady=(0,6), sticky=(W, E,))
+        self.button_search_command = ttk.Button(self.command_button_frame, text="Search")
+        self.button_search_command.grid(row=1, column=0, pady=(0,6), sticky=(W, E,))
         
-        self.add_entry_command = ttk.Button(self.command_frame, text="Add entry")
-        self.add_entry_command.grid(row=2, column=0, pady=(0,6), sticky=(W, E,))
+        self.button_add_entry_command = ttk.Button(self.command_button_frame, text="Add entry")
+        self.button_add_entry_command.grid(row=2, column=0, pady=(0,6), sticky=(W, E,))
         
-        self.update_command = ttk.Button(self.command_frame, text="Update")
-        self.update_command.grid(row=3, column=0, pady=(0,6), sticky=(W, E,))
+        self.button_update_command = ttk.Button(self.command_button_frame, text="Update")
+        self.button_update_command.grid(row=3, column=0, pady=(0,6), sticky=(W, E,))
         
-        self.delete_command = ttk.Button(self.command_frame, text="Delete")
-        self.delete_command.grid(row=4, column=0, pady=(0,6), sticky=(W, E,))
+        self.button_delete_command = ttk.Button(self.command_button_frame, text="Delete")
+        self.button_delete_command.grid(row=4, column=0, pady=(0,6), sticky=(W, E,))
         
-        self.close_command = ttk.Button(self.command_frame, text="Close")
-        self.close_command.grid(row=5, column=0, sticky=(W, E,))
+        self.button_close_command = ttk.Button(self.command_button_frame, text="Close")
+        self.button_close_command.grid(row=5, column=0, sticky=(W, E,))
 
+    def bind_command(item, new_command):
+        return item.configure(command=new_command)
     
 """
 The main call
