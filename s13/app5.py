@@ -8,6 +8,7 @@ def db_connect(db_path=DEFAULT_PATH):
     return sqlite3.connect(db_path)
 
 def main():
+    # TODO: Find out how to bind buttons to functions after declaration
     pass
  
 if __name__ == '__main__':
