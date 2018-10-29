@@ -69,6 +69,16 @@ class BookWindow():
         self.book_isbn_entry = ttk.Entry(self.book_frame, textvariable=self.book_isbn_entry_string)
         self.book_isbn_entry.grid(row=1, column=3, padx=(0,0), pady=(0,0), sticky=(N, E, W))
         
+        def clear_entries():
+            self.book_year_entry_string.set("")
+            self.book_author_entry_string.set("")
+            self.book_isbn_entry_string.set("")
+            self.book_title_entry_string.set("")
+
+        # Clear
+        self.button_clear_book = ttk.Button(self.book_frame, text="Clear", command=clear_entries)
+        self.button_clear_book.grid(row=0, column=4, rowspan=2, pady=(0,4), padx=(6,0), sticky=(N, W, E, S,))
+
         """
         The lower left listbox area
         """

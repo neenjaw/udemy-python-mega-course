@@ -74,9 +74,31 @@ def view_all_books():
     return c.fetchall()
 
 """
-search_book()
+search_by_isbn()
 """
-def search_book(isbn="", title="", author="", year=""):
+def search_by_isbn(isbn):
+    global __DB__    
+    if not is_db_connection_open():
+        raise DbException
+
+    search_sql = """
+        SELECT 
+            * 
+        FROM 
+            bookstore b
+        WHERE 
+            b.isbn = ?
+    """
+
+    c = __DB__.cursor()
+    c.execute(search_sql, (isbn,))
+    
+    return c.fetchone()
+
+"""
+search_books()
+"""
+def search_books(isbn="", title="", author="", year=""):
     global __DB__    
     if not is_db_connection_open():
         raise DbException
@@ -147,8 +169,9 @@ def delete_book(isbn):
         DELETE FROM bookstore WHERE isbn=?
     """
 
-    c.cursor()
+    c = __DB__.cursor()
     c.execute(delete_sql, (isbn,))
+    __DB__.commit()
 
 def main():
     db_connect()
