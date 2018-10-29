@@ -149,11 +149,11 @@ def update_book(isbn, new_isbn, new_title, new_author, new_year):
         raise DbException
 
     update_sql = """
-        UPDATE bookstore SET isbn=?, title=?, author=?, new_year=? WHERE isbn=?
+        UPDATE bookstore SET isbn=?, title=?, author=?, year=? WHERE isbn=?
     """
     
     c = __DB__.cursor()
-    c.execute(update_sql, (isbn, new_isbn, new_title, new_author, new_year,))
+    c.execute(update_sql, (new_isbn, new_title, new_author, new_year, isbn, ))
 
     __DB__.commit()
 
